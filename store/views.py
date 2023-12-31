@@ -1,11 +1,19 @@
 from django.shortcuts import render
 
 
+from .models import Category, Product
+
+
 def store(request):
+    all_products = Product.objects.all()
 
-    return render(request, 'store/store.html')
+    context = {'all_products': all_products}
+
+    return render(request, 'store/store.html', context)
 
 
-def base(request):
+def categories(request):
+    all_categories = Category.objects.all()
 
-    return render(request, 'store/base.html')
+    return {'all_categories': all_categories}
+
