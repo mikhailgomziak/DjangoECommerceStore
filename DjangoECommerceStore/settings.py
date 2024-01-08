@@ -37,12 +37,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third-company libs
     'mathfilters',
+    'crispy_forms',
 
     # Django apps
     'store',
     'cart',
+    'account'
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,7 +131,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 
 MEDIA_URL = '/media/'
