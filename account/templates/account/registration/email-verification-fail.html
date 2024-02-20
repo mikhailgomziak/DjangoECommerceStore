@@ -1,1 +1,25 @@
-<h1>Fail</h1>
+{% include "store/base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+    <style>
+        body{
+            background-color: gray;
+        }
+    </style>
+
+    <br>
+    <body>
+        <div class="container bg-white shadow-md p-5 form-layout">
+            <div class="text-center">
+                <i class="fa fa-times fa-3x text-danger"></i>
+                <h1>Fail</h1>
+                <hr>
+                <p>Try again</p>
+            </div>
+        </div>
+    </body>
+
+{% endblock %}
