@@ -3,6 +3,9 @@ from django.shortcuts import render, redirect
 
 from .forms import RegistrationForm, LoginForm, UpdateUserForm
 
+from payment.forms import ShippingForm
+from payment.models import ShippingAddress
+
 from django.contrib.sites.shortcuts import get_current_site
 from . token import user_tokenizer_generate
 
@@ -138,3 +141,26 @@ def delete_account(request):
         return redirect('store')
 
     return render(request, 'account/delete-account.html')
+
+
+# Shipping view
+def manage_shipping(request):
+    try:
+        shipping_user_id = ShippingAddress.objects.get(user=request.user.id)
+    except ShippingAddress.DoesNotExist as e:
+        shipping_user_id = None
+
+    form = ShippingForm(instance=shipping_user_id)
+
+    if request.method == 'POST':
+        form = ShippingForm(request.POST, instance=shipping_user_id)
+
+        if form.is_valid():
+            shipping_user = form.save(commit=False)
+            shipping_user.user = request.user
+            shipping_user.save()
+            return redirect('dashboard')
+
+    context = {'form': form}
+
+    return render(request, 'account/manage-shipping.html', context=context)
