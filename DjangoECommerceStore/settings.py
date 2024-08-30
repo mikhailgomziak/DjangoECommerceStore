@@ -12,9 +12,14 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Take environment variables from .env file
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -42,6 +47,7 @@ INSTALLED_APPS = [
     # Third-company libs
     'mathfilters',
     'crispy_forms',
+    'crispy_bootstrap4',
 
     # Django apps
     'store',
@@ -151,3 +157,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+
+PAYPAL_ID = env('PAYPAL_ID')
+PAYPAL_SECRET = env('PAYPAL_SECRET')
+PAYPAL_BASE_URL = env('PAYPAL_BASE_URL')
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'

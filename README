@@ -1,1 +1,9 @@
 Project for study.
+
+install requirements
+
+1. DB:
+username: admin
+password: dsaewq321
+
+2. fill up env to make pay pal buttons and email notifications work
